@@ -19,8 +19,7 @@ class LeNet(nn.Module):
     #after conv operation 5-5/1+1 = 1
 
     self.fn1 = nn.Linear(120, 84)
-    self.output = nn.Linear(84, 10)
-    self.softmax = nn.LogSoftmax(dim = 1)
+    self.fn2 = nn.Linear(84, 10)
 
   def forward(self, x):
     x = self.pool(F.relu(self.conv1(x)))
@@ -28,8 +27,7 @@ class LeNet(nn.Module):
     x = F.relu(self.conv3(x))
     x = x.reshape(x.shape[0], -1) # x.shape[0] is batchsize and -1 gives 120*1*1
     x = F.relu(self.fn1(x))
-    x = self.output(x)
-    x = self.softmax(x)
+    x = self.fn2(x)
     return x
 
 model = LeNet()
