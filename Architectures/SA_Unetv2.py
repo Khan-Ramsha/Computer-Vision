@@ -108,7 +108,6 @@ class SAUnetv2(nn.Module):
 
         x = self.up4(bottleneck)  
         print(x.shape)
-        #we are croping to make the dims compatible in order to add as given in the architecture
         d4_attention = self.csa4(x7, x)
         x = self.up_conv4(torch.cat([x, d4_attention], 1))
 
